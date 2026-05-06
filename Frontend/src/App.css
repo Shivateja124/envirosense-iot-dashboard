@@ -1,0 +1,44 @@
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+.navbar {
+  flex-shrink: 0;
+  width: 100%;
+  height: 56px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+  z-index: 100;
+}
+
+.layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 190px;
+  flex-shrink: 0;
+  height: 100%;
+  background: white;
+  border-right: 1px solid #e5e7eb;
+  padding: 16px 12px;
+  font-size: 15px;
+  overflow-y: auto;
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  background: #f3f4f6;
+}

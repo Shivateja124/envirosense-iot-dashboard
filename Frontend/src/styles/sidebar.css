@@ -1,0 +1,40 @@
+.sidebar {
+  position:sticky;
+  width: 190px;
+  color: rgb(0, 0, 0);
+  padding: 10px 15px;
+  font-size: 15px;
+  background-color: white;
+  min-width: 190px;
+}
+
+.menu-title {
+  font-size: 18px;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+
+.menu-item {
+  padding: 7px;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.menu-item:hover {
+  background: #98b7e2;
+}
+
+
+.menu-item.active {
+  color:white;
+   background: #020024;
+  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(13, 13, 56, 1) 15%, rgba(0, 212, 255, 1) 100%);
+}
+
+.item{
+  display: flex;
+  gap:5px;
+}
