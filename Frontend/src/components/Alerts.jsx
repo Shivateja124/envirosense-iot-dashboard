@@ -3,23 +3,22 @@ import { getAlerts } from "../services/alertService";
 import { useNavigate } from "react-router-dom";
 import "../styles/alerts.css";
 
+
 function Alerts() {
   const [alerts, setAlerts] = useState([]);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    const fetchAlerts = () => {
+      getAlerts()
+        .then((res) => setAlerts(Array.isArray(res.data) ? res.data : []))
+        .catch((err) => console.error(err));
+    };
 
-  useEffect(()=>{
-      const fetchAlerts=()=>{
-        getAlerts()
-                  .then((res)=> setAlerts(Array.isArray(res.data)?res.data:[]))
-                  .catch((err)=>console.error(err));
-      };
-
-      fetchAlerts();
-      const interval=setInterval(fetchAlerts,5000);
-      return ()=>clearInterval(interval);
-  },[])
-
-
+    fetchAlerts();
+    const interval = setInterval(fetchAlerts, 3000);
+    return () => clearInterval(interval);
+  }, [])
 
 
   const latest = alerts.slice(-1).reverse();
@@ -58,19 +57,21 @@ function Alerts() {
 
 
       <div className="alert-footer">
-          <span onClick={() => navigate("/alerts")} >View All Alerts History</span>
+        <span onClick={() => navigate("/alerts")} >View All Alerts History</span>
       </div>
     </div>
   );
 }
 
+
+
 function formatTitle(metric) {
   switch (metric) {
-    case "co2_level":       return "High CO₂ Level";
+    case "co2_level": return "High CO₂ Level";
     case "light_intensity": return "Light Intensity Low";
-    case "temperature":     return "High Temperature";
-    case "humidity":        return "Humidity Alert";
-    default:                return metric;
+    case "temperature": return "High Temperature";
+    case "humidity": return "Humidity Alert";
+    default: return metric;
   }
 }
 

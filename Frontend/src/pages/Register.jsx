@@ -13,8 +13,8 @@ function Register() {
   const [success,  setSuccess]  = useState("");
   const [loading,  setLoading]  = useState(false);
 
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const validate = () => {
 
     if (!/^[A-Za-z0-9._]{3,}$/.test(username)) {
@@ -39,6 +39,7 @@ function Register() {
 
     return null;
   };
+  
   
   const handleRegister= async(e)=>{
     e.preventDefault();

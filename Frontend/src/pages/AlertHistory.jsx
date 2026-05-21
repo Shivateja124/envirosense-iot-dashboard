@@ -5,6 +5,7 @@ import "../styles/alertHistory.css";
 function AlertHistory() {
   const [alerts, setAlerts] = useState([]);
 
+  
   useEffect(() => {
     getAlerts()
       .then((res) => {
@@ -28,18 +29,17 @@ function AlertHistory() {
             <th>Time</th>
           </tr>
         </thead>
+
+
         <tbody>
+          
           {alerts.map((alert) => (
             <tr key={alert.id}>
               <td>{alert.deviceId}</td>
               <td>{alert.metric}</td>
               <td>{alert.message}</td>
               <td>
-                <span className={
-                  alert.severity === "HIGH"
-                    ? "alert-severity-high"
-                    : "alert-severity-medium"
-                }>
+                <span className={ alert.severity === "HIGH" ? "alert-severity-high": "alert-severity-medium"}>
                   {alert.severity}
                 </span>
               </td>

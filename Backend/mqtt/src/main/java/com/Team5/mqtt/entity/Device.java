@@ -24,13 +24,12 @@ public class Device {
 
     public Device() {}
 
-    public Device(String deviceId, String name, String status, String type, String location, String registeredAt) {
+    public Device(String deviceId, String name, String status, String type, String location) {
         this.deviceId = deviceId;
         this.name = name;
         this.status = status;
         this.type = type;
         this.location = location;
-        this.registeredAt = registeredAt;
     }
 
 

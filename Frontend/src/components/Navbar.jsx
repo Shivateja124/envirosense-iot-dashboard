@@ -11,7 +11,7 @@ function Navbar() {
     localStorage.removeItem("token");
     window.location.href = "/";
   };
-
+  
   return (
     <div className="navbar">
 
@@ -26,14 +26,11 @@ function Navbar() {
 
         <div className="dropdown">
           <span>Room:</span>
-          <select
-            value={room}
-            onChange={(e) => setRoom(e.target.value)}
-          >
+          <select value={room} onChange={(e) => setRoom(e.target.value)} >
             <option>Meeting Room 1</option>
             <option>Meeting Room 2</option>
             <option>Server Room</option>
-            <option>Gym Area</option>
+            <option>Gym Room</option>
             <option>Cafeteria</option>
           </select>
         </div>

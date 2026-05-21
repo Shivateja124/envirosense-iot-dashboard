@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from "react";
+
 import {
   AreaChart,
   Area,
@@ -37,7 +38,6 @@ function TemperatureChart() {
 
 
           const bucketMap = {};
-
           rows.forEach((item) => {
             const d = new Date(item.timestamp);
             d.setMinutes(Math.floor(d.getMinutes() / 10) * 10);
@@ -49,6 +49,7 @@ function TemperatureChart() {
             bucketMap[key].push(Number(item.value));
           });
 
+          
           const finalData = Object.keys(bucketMap)
             .sort()
             .slice(-6)
@@ -74,7 +75,8 @@ function TemperatureChart() {
           } else {
             setAvg(null);
           }
-        })
+
+        })  
         .catch((err) => console.error("Temperature fetch error:", err));
     };
 
@@ -82,6 +84,9 @@ function TemperatureChart() {
     const interval = setInterval(fetchTemperatureData, 3000);
     return () => clearInterval(interval);
   }, [room]);
+
+
+
 
   const validValues = data.filter((d) => d.value !== null).map((d) => d.value);
   const min      = validValues.length > 0 ? Math.min(...validValues) : null;
@@ -116,6 +121,10 @@ function TemperatureChart() {
           {avg === null ? "No Data" : isNormal ? "Normal" : "Danger"}
         </div>
       </div>
+
+
+
+
 
       <div className="temp-chart-area" style={{ width: "100%", height: 140 }}>
         <ResponsiveContainer width="100%" height={140}>
@@ -179,6 +188,10 @@ function TemperatureChart() {
           </AreaChart>
         </ResponsiveContainer>
       </div>
+
+
+
+
 
       <div className="temp-chart-footer">
         <span className="temp-min" style={{ color: "#000000" }}>

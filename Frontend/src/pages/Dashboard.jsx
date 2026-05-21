@@ -8,7 +8,7 @@ import TemperatureChart from "../components/TemperatureChart";
 import CO2Gauge from "../components/CO2Gauge";
 import HumidityWidget from "../components/HumidityWidget";
 import LightWidget from "../components/LightWidget";
-import Alerts from "./Alerts";
+import Alerts from "../components/Alerts";
 
 function Dashboard() {
   return (
@@ -47,6 +47,8 @@ function Dashboard() {
           </div>
         </div>
       </div>
+
+
 
       <div className="chart-container">
 

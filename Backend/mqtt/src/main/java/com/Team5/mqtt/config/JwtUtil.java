@@ -13,10 +13,8 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    private static final String SECRET = "Team5SecretKeyForJWTMustBe32Chars!";
-
+    private static final String SECRET = "Welcometoscorpionworldsecretkey!";
     private final SecretKey key = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
-
     public String generateToken(String username) {
         return Jwts.builder()
                 .setSubject(username)

@@ -20,6 +20,7 @@ public class UserService {
         if (repo.findByUsername(request.getUsername()).isPresent()) {
             return "User already exists";
         }
+
         User user = new User();
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));

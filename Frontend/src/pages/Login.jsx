@@ -12,11 +12,12 @@ function Login() {
 
   const navigate = useNavigate();
 
+  
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
-
+    
     try {
       const res = await login(username, password);
       localStorage.setItem("token", res.data);
@@ -29,7 +30,6 @@ function Login() {
       setLoading(false);
     }
   };
-
 
 
   return (

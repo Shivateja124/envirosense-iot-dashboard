@@ -3,7 +3,7 @@ import co from "../assets/co.png";
 import { RoomContext } from "../context/RoomContext";
 import { getCO2 } from "../services/telemetryService";
 
-const GOOD_MAX = 700;
+
 const WARNING_MAX = 1000;
 const DANGER_MAX = 1500;
 const MAX_VALUE = 2000;
@@ -43,9 +43,7 @@ function CO2Gauge() {
             return;
           }
 
-
           setValue(Number(rows[rows.length - 1].value));
-
 
           const oneHourAgo = Date.now() - 60 * 60 * 1000;
           const recent = rows.filter((r) => new Date(r.timestamp).getTime() >= oneHourAgo);
@@ -67,10 +65,9 @@ function CO2Gauge() {
 
 
 
-
-
   const cx = 160, cy = 145, r = 100, strokeW = 18;
 
+  
   let status = "Normal";
   let statusClass = "co2-badge-normal";
 
@@ -85,6 +82,7 @@ function CO2Gauge() {
     statusClass = "co2-badge-warning";
   }
 
+
   const segments = [
     { start: -180, end: valueToAngle(700), color: "#22c55e" },
     { start: valueToAngle(700), end: valueToAngle(1000), color: "#facc15" },
@@ -93,6 +91,7 @@ function CO2Gauge() {
   ];
 
   
+
   const ticks = [0, 500, 1000, 1500, 2000];
 
   return (

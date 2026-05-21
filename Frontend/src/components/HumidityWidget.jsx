@@ -4,11 +4,13 @@ import { getHumidity } from "../services/telemetryService";
 
 function HumidityWidget() {
   const { room } = useContext(RoomContext);
+
   const [humidity, setHumidity] = useState(0);
-  const [avg, setAvg]           = useState(0);
-  const [min, setMin]           = useState(0);
-  const [max, setMax]           = useState(0);
-  const [hasData, setHasData]   = useState(false);
+  const [avg, setAvg] = useState(0);
+  const [min, setMin] = useState(0);
+  const [max, setMax] = useState(0);
+  const [hasData, setHasData] = useState(false);
+
 
   useEffect(() => {
     setHumidity(0);
@@ -16,6 +18,7 @@ function HumidityWidget() {
     setMin(0);
     setMax(0);
     setHasData(false);
+
 
     const fetchHumidity = () => {
       getHumidity(room)
@@ -34,20 +37,22 @@ function HumidityWidget() {
           setHasData(true);
           setHumidity(Number(rows[rows.length - 1].value));
 
-          const oneHourAgo = Date.now() - 60 * 60 * 1000;
-          const recent = rows.filter((r) => new Date(r.timestamp).getTime() >= oneHourAgo);
           
-          if(recent.length>0){
+
+          const oneHourAgo=Date.now()-60*60*1000;
+          const recent=rows.filter((r)=>new Date(r.timestamp).getTime()>=oneHourAgo);
+
+          if(recent>0){
             const avg=recent.reduce((s,r)=>s+Number(r.value),0)/recent.length;
             setAvg(parseFloat(avg.toFixed(1)));
-            
           }else{
             setAvg(0);
           }
+
           const values = rows.map(r => Number(r.value));
           setMin(Math.min(...values).toFixed(1));
           setMax(Math.max(...values).toFixed(1));
-          
+
         })
         .catch((err) => console.log(err));
     };
@@ -57,15 +62,23 @@ function HumidityWidget() {
     return () => clearInterval(interval);
   }, [room]);
 
-  const status =
-    !hasData        ? "No Data" :
-    humidity < 30   ? "Low"     :
-    humidity > 70   ? "High"    : "Normal";
 
-  const statusClass =
-    status === "No Data" ? "hum-badge-nodata"  :
-    status === "Normal"  ? "hum-badge-normal"  :
-    status === "High"    ? "hum-badge-danger"  : "hum-badge-warning";
+
+  let status = "Normal";
+  let statusClass = "hum-badge-normal";
+
+  if (!hasData) {
+    status = "No Data";
+    statusClass = "hum-badge-nodata";
+  } else if (humidity > 70) {
+    status = "High";
+    statusClass = "hum-badge-danger";
+  } else if (humidity < 30) {
+    status = "Low";
+    statusClass = "hum-badge-warning";
+  }
+
+
 
   const fillPct = Math.min(85, Math.max(20, humidity * 0.65 + 20));
 
@@ -99,7 +112,7 @@ function HumidityWidget() {
                 <path d="M50 5 C50 5 10 55 10 78 a40 40 0 0 0 80 0 C90 55 50 5 50 5Z" />
               </clipPath>
               <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%"   stopColor="#93c5fd" />
+                <stop offset="0%" stopColor="#93c5fd" />
                 <stop offset="100%" stopColor="#3b82f6" />
               </linearGradient>
             </defs>

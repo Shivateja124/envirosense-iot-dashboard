@@ -53,7 +53,6 @@ public class AlertService {
             ));
         }
 
-
         if ("temperature".equals(metric) && value > 35) {
             alerts.add(new Alert(
                     data.getDevice().getDeviceId(),

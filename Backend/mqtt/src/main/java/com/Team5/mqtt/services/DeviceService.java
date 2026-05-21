@@ -33,8 +33,10 @@ public class DeviceService {
 
     public List<String> validate(Device device) {
         List<String> errors = new ArrayList<>();
-        if (device.getDeviceId() == null || device.getDeviceId().trim().isEmpty())
+        if (device.getDeviceId() == null || device.getDeviceId().trim().isEmpty()) {
             errors.add("deviceId is required");
+        } else if (deviceRepository.existsById(device.getDeviceId()))
+            errors.add("Device ID already exists: " + device.getDeviceId());
         if (device.getName() == null || device.getName().trim().isEmpty())
             errors.add("name is required");
         if (device.getStatus() == null || (!device.getStatus().equals("ACTIVE") && !device.getStatus().equals("INACTIVE")))
@@ -45,6 +47,10 @@ public class DeviceService {
     }
 
     public Device save(Device device) {
+        device.setRegisteredAt(
+                java.time.LocalDateTime.now()
+                        .format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+        );
         return deviceRepository.save(device);
     }
 

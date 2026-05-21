@@ -10,6 +10,7 @@ function LightWidget() {
   const [max, setMax]     = useState(0);
   const [hasData, setHasData] = useState(false);
 
+
   useEffect(() => {
     setLight(0);
     setAvg(0);
@@ -32,7 +33,6 @@ function LightWidget() {
           }
 
           setHasData(true);
-      
           setLight(Number(rows[rows.length-1].value));
 
           const oneHourAgo = Date.now() - 60 * 60 * 1000;
@@ -45,6 +45,7 @@ function LightWidget() {
           }else{
             setAvg(0);
           }
+
           const values = rows.map(r => Number(r.value));
           setMin(Math.min(...values).toFixed(1));
           setMax(Math.max(...values).toFixed(1));
@@ -57,15 +58,22 @@ function LightWidget() {
     return () => clearInterval(interval);
   }, [room]);
 
-  const status =
-    !hasData      ? "No Data" :
-    light < 100   ? "Dark"    :
-    light > 500   ? "Bright"  : "Normal";
 
-  const statusClass =
-    status === "No Data" ? "light-badge-nodata"  :
-    status === "Normal"  ? "light-badge-normal"  :
-    status === "Bright"  ? "light-badge-warning" : "light-badge-dark";
+
+
+let status = "Normal";
+let statusClass = "light-badge-normal";
+
+if (!hasData) {
+  status = "No Data";
+  statusClass = "light-badge-nodata";
+} else if (light > 500) {
+  status = "Bright";
+  statusClass = "light-badge-warning";
+} else if (light < 100) {
+  status = "Dark";
+  statusClass = "light-badge-dark";
+}
 
   return (
     <div className="light-card">
