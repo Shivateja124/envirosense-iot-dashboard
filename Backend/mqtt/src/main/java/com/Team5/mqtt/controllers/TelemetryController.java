@@ -49,7 +49,6 @@ public class TelemetryController {
                     telemetryService.getByMetricAndLocation(metric, location)
             );
         }
-
         return ResponseEntity.ok(telemetryService.getByMetric(metric));
     }
 }

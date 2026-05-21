@@ -23,10 +23,12 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
+
     @PostMapping("/register")
     public String register(@RequestBody RegisterRequest request) {
         return userService.registerUser(request);
     }
+
 
     @PostMapping("/login")
     public String login(@RequestBody LoginRequest request) {
